@@ -23,7 +23,6 @@
         android:background="@android:color/transparent"
         android:src="@drawable/ic_details"/>
 
-
     <ImageView
         android:id="@+id/video_image_view"
         android:layout_width="wrap_content"
