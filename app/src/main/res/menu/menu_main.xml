@@ -1,20 +1,50 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context="com.huynhtinh1997.favito.MainActivity">
+      tools:context="com.huynhtinh1997.favito.activity.MainActivity">
     <item
         android:id="@+id/photo_capture"
         android:icon="@drawable/ic_photo_capture"
         android:title="@string/capture_photo"
+        android:visible="false"
         app:showAsAction="always"/>
+
     <item
         android:id="@+id/video_record"
         android:icon="@drawable/ic_video_record"
         android:title="@string/record_video"
+        android:visible="false"
         app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/share_to_fb"
+        android:icon="@drawable/com_facebook_button_login_logo"
+        android:title="@string/share_to_facebook"
+        android:visible="false"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/select_all"
+        android:icon="@drawable/ic_select_all"
+        android:title="@string/select_all"
+        android:visible="false"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/scan"
+        android:title="@string/rescan"
+        android:visible="false"
+        app:showAsAction="never|withText"/>
+
+    <item
+        android:id="@+id/detail"
+        android:title="@string/details"
+        android:visible="false"
+        app:showAsAction="never|withText"/>
+
     <item
         android:id="@+id/login_logout"
-        android:icon="@drawable/com_facebook_button_icon"
         android:title="@string/log_in_out"
+        android:visible="true"
         app:showAsAction="never|withText"/>
 </menu>

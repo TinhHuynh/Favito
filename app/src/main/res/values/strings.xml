@@ -7,5 +7,15 @@
     <string name="capture_photo">Capture photo</string>
     <string name="record_video">Record video</string>
     <string name="log_in_out">Log %1$s</string>
+    <string name="select_all">Select all</string>
+    <string name="num_of_selected_thumbnails">%1$d item(s) selected</string>
+    <string name="rescan">Rescan</string>
+    <string name="share_to_facebook">Share to Facebook</string>
+    <string name="details">Details</string>
+    <string name="name">Name:</string>
+    <string name="last_modified_date">Last Modified Date:</string>
+    <string name="length">Length:</string>
+    <string name="ok">Ok</string>
+    <string name="path">Path:</string>
 
 </resources>
