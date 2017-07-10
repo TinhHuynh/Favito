@@ -1,4 +1,4 @@
-package com.huynhtinh1997.favito.dialog;
+package com.huynhtinh1997.favito.view.dialog;
 
 import android.app.AlertDialog;
 import android.content.Context;

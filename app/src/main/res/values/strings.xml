@@ -17,5 +17,9 @@
     <string name="length">Length:</string>
     <string name="ok">Ok</string>
     <string name="path">Path:</string>
-
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="read_me_first">Read Me First</string>
+    <string name="read_me_text">Thanks for using Favito.\n\nFavito helps you to capture/upload your great photos/videos to Facebook.\n\nBecause of the limitation of Facebook SDK usage, so please notice that:\n\n+Photo/Video should be less than 12MB.\n\n+Maximum number of total photos/videos is 6\n\n+Supported format photo: .jpg, .png.\n\n+Supported format video: .mp4, .flv.\n\n  Now enjoy the app !!!</string>
+    <string name="read_me">Read me</string>
+    <string name="desellect">Desellect</string>
 </resources>

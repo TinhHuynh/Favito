@@ -3,12 +3,13 @@ package com.huynhtinh1997.favito.model;
 import android.support.annotation.NonNull;
 
 import java.io.File;
+import java.io.Serializable;
 
 /**
  * Created by huynhtinh1997 on 01/07/2017.
  */
 
-public class FileHolder implements Comparable<FileHolder> {
+public class FileHolder implements Comparable<FileHolder>, Serializable {
     private File mMediaFile;
 
     public File getMediaFile() {
