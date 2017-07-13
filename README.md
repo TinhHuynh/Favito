@@ -8,7 +8,7 @@ Favito helps users upload photos/videos stored in his/her Android smartphone to 
 + Capture photo/video and update list.
 + View details of photos/videos.
 
-Demo video: updating
+Demo video: https://www.youtube.com/watch?v=lnKP7_5asFA&feature=youtu.be
 
 Libraries used for building app:
 + Glide (load and cache image): https://github.com/bumptech/glide
