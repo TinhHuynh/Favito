@@ -49,17 +49,18 @@ import java.util.ArrayList;
 
 public class MediaActivity extends BaseActivity {
     private static final String EXTRA_FILE_HOLDERS = "file holders";
-    private static final String EXTRA_POSTION = "position";
+    private static final String EXTRA_POSITION = "position";
 
     private File mCurrentFile;
     private int mCurrentPosition;
     private ArrayList<FileHolder> mFileHolders;
-    private SparseArray<VideoFragment> mActiveVideoFragments;
+    private MediaAdapter mAdapter;
+
 
     public static Intent newIntent(Context context, int position, ArrayList<FileHolder> fileHolders) {
         Intent intent = new Intent(context, MediaActivity.class);
         intent.putExtra(EXTRA_FILE_HOLDERS, fileHolders);
-        intent.putExtra(EXTRA_POSTION, position);
+        intent.putExtra(EXTRA_POSITION, position);
         return intent;
     }
 
@@ -73,8 +74,7 @@ public class MediaActivity extends BaseActivity {
         setContentView(R.layout.activity_media);
         initActionBar();
         mFileHolders = (ArrayList<FileHolder>) getIntent().getSerializableExtra(EXTRA_FILE_HOLDERS);
-        mCurrentPosition = getIntent().getIntExtra(EXTRA_POSTION, 0);
-        mActiveVideoFragments = new SparseArray<>();
+        mCurrentPosition = getIntent().getIntExtra(EXTRA_POSITION, 0);
         initViewPager();
     }
 
@@ -150,7 +150,8 @@ public class MediaActivity extends BaseActivity {
 
     private void initViewPager() {
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
-        viewPager.setAdapter(new MediaAdapter(getSupportFragmentManager()));
+        mAdapter = new MediaAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(mAdapter);
         viewPager.setCurrentItem(mCurrentPosition);
         mCurrentFile = mFileHolders.get(mCurrentPosition).getMediaFile();
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -159,20 +160,9 @@ public class MediaActivity extends BaseActivity {
             public void onPageSelected(int position) {
                 mCurrentPosition = position;
                 mCurrentFile = mFileHolders.get(position).getMediaFile();
-                hideActiveMediaControllers();
+                mAdapter.hideActiveMediaControllers();
             }
         });
-    }
-
-    private void hideActiveMediaControllers() {
-        if (mActiveVideoFragments.size() != 0) {
-            int count = mActiveVideoFragments.size();
-            for (int i = 0; i < count; i++) {
-                int key = mActiveVideoFragments.keyAt(i);
-                VideoFragment VideoFragment = mActiveVideoFragments.get(key);
-                VideoFragment.hideMediaController();
-            }
-        }
     }
 
     public static class PhotoFragment extends Fragment {
@@ -230,6 +220,7 @@ public class MediaActivity extends BaseActivity {
     public static class VideoFragment extends Fragment {
         private static final String ARG_VIDEO_FILE = "video";
         private static final float MEDIA_CONTROLLER_ALPHA = 0.7f;
+        private static final String TAG = "VideoFragment";
 
         private File mFile;
         private RelativeLayout mThumbnailLayout;
@@ -262,16 +253,20 @@ public class MediaActivity extends BaseActivity {
             mVideoView = rootView.findViewById(R.id.video_view);
             mThumbnailLayout = rootView.findViewById(R.id.thumbnail_layout);
             mThumbnailImageView = rootView.findViewById(R.id.thumbnail_image_view);
+            return rootView;
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
             initThumbnail();
             initVideoView();
-            return rootView;
         }
 
         private void initThumbnail() {
             Glide.with(getActivity())
                     .load(Uri.fromFile(mFile))
                     .into(mThumbnailImageView);
-
             mThumbnailLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -312,9 +307,11 @@ public class MediaActivity extends BaseActivity {
     }
 
     private class MediaAdapter extends FragmentStatePagerAdapter {
+        private SparseArray<VideoFragment> mActiveVideoFragments;
 
         MediaAdapter(FragmentManager fm) {
             super(fm);
+            mActiveVideoFragments = new SparseArray<>();
         }
 
         @Override
@@ -356,6 +353,17 @@ public class MediaActivity extends BaseActivity {
 
         private boolean isVideoFragment(int position) {
             return MediaUtils.checkSupportVideoFile(mFileHolders.get(position).getMediaFile());
+        }
+
+        private void hideActiveMediaControllers() {
+            if (mActiveVideoFragments.size() != 0) {
+                int count = mActiveVideoFragments.size();
+                for (int i = 0; i < count; i++) {
+                    int key = mActiveVideoFragments.keyAt(i);
+                    VideoFragment VideoFragment = mActiveVideoFragments.get(key);
+                    VideoFragment.hideMediaController();
+                }
+            }
         }
     }
 
