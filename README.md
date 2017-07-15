@@ -11,5 +11,6 @@ Favito helps users upload photos/videos stored in his/her Android smartphone to 
 Demo video: https://www.youtube.com/watch?v=lnKP7_5asFA&feature=youtu.be
 
 Libraries used for building app:
++ Facebook SDK Android: https://developers.facebook.com/docs/android/
 + Glide (load and cache image): https://github.com/bumptech/glide
 + PhotoView (zoom in/out imageview): https://github.com/chrisbanes/PhotoView
